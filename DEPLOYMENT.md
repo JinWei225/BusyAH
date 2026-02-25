@@ -34,12 +34,13 @@ You'll need a live Turso database to connect to your Vercel app, as the local SQ
      turso db tokens create busyah-db
      ```
 
-4. **Push Your Schema to Turso:**
-   - To create the tables in your new production database, set the environment variables locally temporarily or use the Turso CLI.
-   - Run the following in your terminal, replacing the URL and Token with the ones you just got:
+4. **Push Your Schema to Turso (CRITICAL):**
+   - Vercel will attempt to build your app, which requires the database tables to exist. 
+   - Run this command in your terminal, replacing the placeholders with your **Production** Turso URL and Token:
      ```bash
-     TURSO_DATABASE_URL="your-turso-db-url" TURSO_AUTH_TOKEN="your-turso-token" npm run db:push
+     TURSO_DATABASE_URL="your-production-db-url" TURSO_AUTH_TOKEN="your-production-token" npm run db:push
      ```
+   - **Note:** If you get an error saying "no such table: settings" on Vercel, it means this step was skipped or failed.
 
 ## Part 2: Deploying to Vercel
 
@@ -59,6 +60,12 @@ You'll need a live Turso database to connect to your Vercel app, as the local SQ
      - `GOOGLE_CALENDAR_ID`: **This is NOT your Client ID.** Open Google Calendar (web), go to Settings for your calendar -> "Integrate calendar" -> copy the "Calendar ID" (usually your email).
      - `TURSO_DATABASE_URL`: *(Paste the URL from Turso)*
      - `TURSO_AUTH_TOKEN`: *(Paste the Token from Turso)*
+
+### Troubleshooting Google Calendar "Blocked" Errors
+If you see a message saying "Requests to this API calendar method... are blocked", check these three things:
+1. **Enable the API**: Go to [APIs & Services Dashboard](https://console.cloud.google.com/apis/dashboard) and ensure "Google Calendar API" is enabled.
+2. **Key Restrictions**: If you restricted your API Key to certain APIs, make sure "Google Calendar API" is checked in the list of allowed APIs for that key.
+3. **Make Calendar Public**: Go to your Google Calendar settings -> "Access permissions for events" -> Check "**Make available to public**". (Note: Only "Free/Busy" or "See all event details" is required for the app to read them).
 
 4. **Deploy:**
    - Click the **Deploy** button.

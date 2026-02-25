@@ -8,8 +8,13 @@ import { randomUUID } from 'crypto';
 
 // Server Actions for Settings
 export async function getSetting(key: string) {
-    const result = await db.select().from(settings).where(eq(settings.key, key)).limit(1);
-    return result[0]?.value || null;
+    try {
+        const result = await db.select().from(settings).where(eq(settings.key, key)).limit(1);
+        return result[0]?.value || null;
+    } catch (e) {
+        console.error(`Setting fetch failed for ${key}:`, e);
+        return null; // Return null if table doesn't exist yet (prevents build crash)
+    }
 }
 
 export async function updateSetting(key: string, value: string) {
