@@ -100,3 +100,58 @@
     border-color: var(--primary);
     background: var(--bg-surface-hover);
 }
+
+/* Three-dot Menu */
+.menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-surface-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    min-width: 120px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-menu button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    /* Reduced gap */
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.dropdown-menu button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu button.danger {
+    color: var(--danger);
+}
+
+.dropdown-menu button.danger:hover {
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 4px;
+}
