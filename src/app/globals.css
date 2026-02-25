@@ -199,7 +199,6 @@ a {
 
   .sidebar nav {
     display: flex;
-    gap: 0.5rem;
   }
 
   .nav-link span {
