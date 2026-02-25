@@ -1,0 +1,74 @@
+.deadlines-widget {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.widget-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-deadline-form {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.mb-2 {
+    margin-bottom: 0.8rem;
+}
+
+.deadline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.deadline-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.deadline-card:hover {
+    border-color: rgba(255, 107, 26, 0.4);
+    background: var(--bg-surface-hover);
+}
+
+.deadline-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.deadline-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.countdown-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    background: rgba(255, 107, 26, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.countdown-badge.danger {
+    color: var(--danger);
+    background: rgba(255, 71, 87, 0.1);
+}

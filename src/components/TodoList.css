@@ -1,0 +1,174 @@
+/* Dashboard specific layouts */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Widgets Base */
+.widget-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+/* Todos */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.todo-item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.todo-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.todo-card:hover {
+    border-color: rgba(255, 107, 26, 0.4);
+    background: var(--bg-surface-hover);
+}
+
+.todo-card.completed .todo-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.todo-check {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.todo-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-title {
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+
+.subtask-badge {
+    background: rgba(255, 107, 26, 0.15);
+    color: var(--primary);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.todo-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.btn-icon.danger:hover {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--danger);
+}
+
+.subtasks-container {
+    margin-left: 36px;
+    padding-left: 16px;
+    border-left: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+}
+
+.subtask-item.completed .subtask-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.subtask-title {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.btn-icon.danger-small {
+    padding: 4px;
+}
+
+.btn-icon.danger-small:hover {
+    color: var(--danger);
+}
+
+.add-subtask-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.small-input {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.small-btn {
+    padding: 6px 10px;
+    border-radius: 8px;
+}
