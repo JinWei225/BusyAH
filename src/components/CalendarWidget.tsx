@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CalendarEvent } from '@/lib/calendar';
 import { ChevronLeft, ChevronRight, Calendar as CalIcon } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, endOfWeek, startOfWeek, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, setMonth, setYear } from 'date-fns';
@@ -12,6 +12,11 @@ interface CalendarWidgetProps {
 
 export default function CalendarWidget({ events }: CalendarWidgetProps) {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const monthStart = startOfMonth(currentDate);
     const monthEnd = endOfMonth(monthStart);
@@ -36,8 +41,10 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 10 }, (_, i) => currentYear - 5 + i);
 
+    if (!mounted) return <div className="calendar-widget" style={{ opacity: 0 }}></div>;
+
     return (
-        <div className="calendar-widget">
+        <div className="calendar-widget" suppressHydrationWarning>
             <div className="calendar-controls">
                 <div className="cal-selectors">
                     <select value={currentDate.getMonth()} onChange={handleMonthChange} className="cal-select">

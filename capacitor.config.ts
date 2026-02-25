@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'BusyAH',
   webDir: 'public',
   server: {
-    url: 'https://busyah-your-vercel-domain.vercel.app',
+    url: 'busy-63f5m42zn-jinwei225s-projects.vercel.app',
     cleartext: true
   }
 };
