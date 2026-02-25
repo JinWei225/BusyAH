@@ -21,7 +21,7 @@ export async function updateSetting(key: string, value: string) {
     await db.insert(settings)
         .values({ key, value })
         .onConflictDoUpdate({ target: settings.key, set: { value } });
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
 }
 
 // Server Actions for Todos

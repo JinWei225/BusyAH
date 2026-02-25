@@ -2,6 +2,8 @@ import CalendarWidget from '@/components/CalendarWidget';
 import { getUpcomingEvents } from '@/lib/calendar';
 import { getSetting } from '@/app/actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CalendarPage() {
     const calendarId = await getSetting('selected_calendar_id') || undefined;
     const events = await getUpcomingEvents(20, calendarId);

@@ -4,6 +4,8 @@ import CalendarWidget from '@/components/CalendarWidget';
 import { getTodos, getDeadlines, getSetting } from '@/app/actions';
 import { getUpcomingEvents } from '@/lib/calendar';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const todos = await getTodos();
   const deadlines = await getDeadlines();
