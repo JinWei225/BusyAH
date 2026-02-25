@@ -17,8 +17,10 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
     const [targetDate, setTargetDate] = useState('');
     const [loading, setLoading] = useState(false);
     const [now, setNow] = useState(new Date());
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const interval = setInterval(() => setNow(new Date()), 60000); // update every minute
         return () => clearInterval(interval);
     }, []);
@@ -45,8 +47,10 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
         return `${days}d ${hours}h ${minutes}m left`;
     };
 
+    if (!mounted) return <div className="deadlines-widget" style={{ opacity: 0 }}></div>;
+
     return (
-        <div className="deadlines-widget">
+        <div className="deadlines-widget" suppressHydrationWarning>
             <div className="widget-header">
                 <h2 className="widget-title">Deadlines</h2>
             </div>

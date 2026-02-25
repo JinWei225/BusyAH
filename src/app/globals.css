@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #0d0d0f; /* very dark, almost black */
+  --bg-color: #0d0d0f;
+  /* very dark, almost black */
   --bg-surface: #1a1a1e;
   --bg-surface-hover: #232328;
   --text-primary: #f0f0f5;
   --text-secondary: #a0a0b0;
-  --primary: #ff6b1a; /* bold orange */
+  --primary: #ff6b1a;
+  /* bold orange */
   --primary-hover: #ff8540;
   --secondary: #e65c00;
   --border-color: #33333d;
@@ -78,7 +80,8 @@ a {
   transition: var(--transition);
 }
 
-.nav-link:hover, .nav-link[data-active="true"] {
+.nav-link:hover,
+.nav-link[data-active="true"] {
   background: rgba(255, 107, 26, 0.1);
   color: var(--primary);
 }
@@ -177,6 +180,7 @@ a {
   .app-container {
     flex-direction: column;
   }
+
   .sidebar {
     width: 100%;
     height: auto;
@@ -188,18 +192,84 @@ a {
     justify-content: space-between;
     align-items: center;
   }
-  .sidebar h1 { margin-bottom: 0; }
+
+  .sidebar h1 {
+    margin-bottom: 0;
+  }
+
   .sidebar nav {
     display: flex;
     gap: 0.5rem;
   }
+
   .nav-link span {
     display: none;
   }
+
   .main-content {
     padding: 1rem;
   }
+
   .grid-2 {
     grid-template-columns: 1fr;
   }
+}
+
+/* Settings Styles */
+.settings-container {
+  background: var(--bg-surface);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  max-width: 650px;
+  margin-top: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.settings-group {
+  margin-bottom: 2rem;
+}
+
+.settings-group label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.settings-help {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.settings-message {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.settings-message.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.settings-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
 }

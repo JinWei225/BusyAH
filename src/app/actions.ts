@@ -1,12 +1,26 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { todos, subtasks, deadlines } from '@/lib/db/schema';
+import { todos, subtasks, deadlines, settings } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { randomUUID } from 'crypto';
 
+// Server Actions for Settings
+export async function getSetting(key: string) {
+    const result = await db.select().from(settings).where(eq(settings.key, key)).limit(1);
+    return result[0]?.value || null;
+}
+
+export async function updateSetting(key: string, value: string) {
+    await db.insert(settings)
+        .values({ key, value })
+        .onConflictDoUpdate({ target: settings.key, set: { value } });
+    revalidatePath('/');
+}
+
 // Server Actions for Todos
+// ... existing code ...
 export async function getTodos() {
     return await db.select().from(todos).orderBy(desc(todos.createdAt));
 }

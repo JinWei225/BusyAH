@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Calendar, CheckSquare, Clock } from 'lucide-react';
+import { Calendar, CheckSquare, Clock, Settings } from 'lucide-react';
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -29,6 +29,12 @@ export default function Sidebar() {
                     <div className="nav-link" data-active={pathname === '/deadlines' ? 'true' : 'false'}>
                         <Clock size={20} />
                         <span>Deadlines</span>
+                    </div>
+                </Link>
+                <Link href="/settings">
+                    <div className="nav-link" data-active={pathname === '/settings' ? 'true' : 'false'}>
+                        <Settings size={20} />
+                        <span>Settings</span>
                     </div>
                 </Link>
             </nav>

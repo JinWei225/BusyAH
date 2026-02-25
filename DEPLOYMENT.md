@@ -55,10 +55,10 @@ You'll need a live Turso database to connect to your Vercel app, as the local SQ
 3. **Configure Environment Variables in Vercel:**
    - Before clicking "Deploy", open the **Environment Variables** section.
    - Add the following variables:
+     - `GOOGLE_API_KEY`: **This is NOT your Client Secret.** Go to [Google Cloud Console](https://console.cloud.google.com/apis/credentials), click "Create Credentials" -> "API Key".
+     - `GOOGLE_CALENDAR_ID`: **This is NOT your Client ID.** Open Google Calendar (web), go to Settings for your calendar -> "Integrate calendar" -> copy the "Calendar ID" (usually your email).
      - `TURSO_DATABASE_URL`: *(Paste the URL from Turso)*
      - `TURSO_AUTH_TOKEN`: *(Paste the Token from Turso)*
-     - `GOOGLE_API_KEY`: *(Your Google API Key for Calendar - optional)*
-     - `GOOGLE_CALENDAR_ID`: *(Your Google Calendar ID - optional)*
 
 4. **Deploy:**
    - Click the **Deploy** button.

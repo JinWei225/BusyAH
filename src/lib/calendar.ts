@@ -5,9 +5,9 @@ export interface CalendarEvent {
     end: string;
 }
 
-export async function getUpcomingEvents(maxResults: number = 5): Promise<CalendarEvent[]> {
+export async function getUpcomingEvents(maxResults: number = 5, customCalendarId?: string): Promise<CalendarEvent[]> {
     const apiKey = process.env.GOOGLE_API_KEY;
-    const calendarId = process.env.GOOGLE_CALENDAR_ID;
+    const calendarId = customCalendarId || process.env.GOOGLE_CALENDAR_ID;
 
     if (apiKey && calendarId) {
         try {

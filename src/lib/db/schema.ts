@@ -35,3 +35,9 @@ export const deadlines = sqliteTable('deadlines', {
         .default(sql`(strftime('%s', 'now'))`)
         .notNull(),
 });
+
+export const settings = sqliteTable('settings', {
+    key: text('key').primaryKey(),
+    value: text('value').notNull(),
+});
+
