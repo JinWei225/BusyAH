@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Calendar, CheckSquare, Clock } from 'lucide-react';
-import Link from 'next/link';
+import Sidebar from '@/components/Sidebar';
 
 export const metadata: Metadata = {
   title: 'BusyAH',
@@ -17,31 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="app-container">
-          <aside className="sidebar">
-            <h1>
-              <span style={{ color: 'var(--text-primary)' }}>Busy</span>AH
-            </h1>
-            <nav>
-              <Link href="/">
-                <div className="nav-link" data-active="true">
-                  <CheckSquare size={20} />
-                  <span>Dashboard</span>
-                </div>
-              </Link>
-              <Link href="/calendar">
-                <div className="nav-link">
-                  <Calendar size={20} />
-                  <span>Calendar</span>
-                </div>
-              </Link>
-              <Link href="/deadlines">
-                <div className="nav-link">
-                  <Clock size={20} />
-                  <span>Deadlines</span>
-                </div>
-              </Link>
-            </nav>
-          </aside>
+          <Sidebar />
           <main className="main-content">
             {children}
           </main>

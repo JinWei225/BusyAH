@@ -1,0 +1,37 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Calendar, CheckSquare, Clock } from 'lucide-react';
+
+export default function Sidebar() {
+    const pathname = usePathname();
+
+    return (
+        <aside className="sidebar">
+            <h1>
+                <span style={{ color: 'var(--text-primary)' }}>Busy</span>AH
+            </h1>
+            <nav>
+                <Link href="/">
+                    <div className="nav-link" data-active={pathname === '/' ? 'true' : 'false'}>
+                        <CheckSquare size={20} />
+                        <span>Dashboard</span>
+                    </div>
+                </Link>
+                <Link href="/calendar">
+                    <div className="nav-link" data-active={pathname === '/calendar' ? 'true' : 'false'}>
+                        <Calendar size={20} />
+                        <span>Calendar</span>
+                    </div>
+                </Link>
+                <Link href="/deadlines">
+                    <div className="nav-link" data-active={pathname === '/deadlines' ? 'true' : 'false'}>
+                        <Clock size={20} />
+                        <span>Deadlines</span>
+                    </div>
+                </Link>
+            </nav>
+        </aside>
+    );
+}
