@@ -184,13 +184,17 @@ a {
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 1rem;
+    padding-top: calc(0.8rem + env(safe-area-inset-top));
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background: var(--bg-surface);
   }
 
   .sidebar h1 {
