@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    flex: 1;
 }
 
 .deadline-title {
@@ -71,4 +72,31 @@
 .countdown-badge.danger {
     color: var(--danger);
     background: rgba(255, 71, 87, 0.1);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.deadline-actions {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.edit-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.deadline-card.editing {
+    border-color: var(--primary);
+    background: var(--bg-surface-hover);
 }

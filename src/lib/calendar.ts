@@ -3,6 +3,7 @@ export interface CalendarEvent {
     title: string;
     start: string;
     end: string;
+    location?: string;
 }
 
 export async function getUpcomingEvents(maxResults: number = 5, customCalendarId?: string): Promise<CalendarEvent[]> {
@@ -22,6 +23,7 @@ export async function getUpcomingEvents(maxResults: number = 5, customCalendarId
                         title: item.summary,
                         start: new Date(item.start.dateTime || item.start.date).toISOString(),
                         end: new Date(item.end.dateTime || item.end.date).toISOString(),
+                        location: item.location,
                     }));
                 }
             } else {

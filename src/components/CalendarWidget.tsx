@@ -91,7 +91,7 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
                 })}
             </div>
 
-            <div className="mt-4">
+            <div style={{ marginTop: '3rem' }}>
                 <UpcomingEvents
                     events={filteredEvents}
                     title={`Events for ${format(selectedDate, 'MMMM d, yyyy')}`}

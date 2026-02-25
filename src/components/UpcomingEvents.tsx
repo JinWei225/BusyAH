@@ -21,7 +21,7 @@ export default function UpcomingEvents({ events, title = "Upcoming Events", maxH
                 {events.length === 0 ? (
                     <p className="no-events">No events found.</p>
                 ) : (
-                    events.map(event => (
+                    events.slice(0, 5).map(event => (
                         <div key={event.id} className="event-item">
                             <div className="event-date">
                                 <span className="event-day">{format(new Date(event.start), 'dd')}</span>
@@ -29,7 +29,12 @@ export default function UpcomingEvents({ events, title = "Upcoming Events", maxH
                             </div>
                             <div className="event-details">
                                 <h4 className="event-name">{event.title}</h4>
-                                <p className="event-time">
+                                {event.location && (
+                                    <p className="event-location" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                                        📍 {event.location}
+                                    </p>
+                                )}
+                                <p className="event-time" style={{ marginTop: event.location ? '4px' : '0' }}>
                                     {format(new Date(event.start), 'p')} - {format(new Date(event.end), 'p')}
                                 </p>
                             </div>

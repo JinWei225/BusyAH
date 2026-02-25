@@ -49,6 +49,11 @@ export async function deleteTodo(id: string) {
     revalidatePath('/');
 }
 
+export async function updateTodo(id: string, title: string, notes: string = '') {
+    await db.update(todos).set({ title, notes }).where(eq(todos.id, id));
+    revalidatePath('/');
+}
+
 // Subtasks
 export async function getSubtasks(todoId: string) {
     return await db.select().from(subtasks).where(eq(subtasks.todoId, todoId)).orderBy(desc(subtasks.createdAt));
@@ -73,6 +78,11 @@ export async function deleteSubtask(id: string) {
     revalidatePath('/');
 }
 
+export async function updateSubtask(id: string, title: string) {
+    await db.update(subtasks).set({ title }).where(eq(subtasks.id, id));
+    revalidatePath('/');
+}
+
 // Deadlines
 export async function getDeadlines() {
     return await db.select().from(deadlines).orderBy(desc(deadlines.targetDate));
@@ -90,5 +100,10 @@ export async function createDeadline(title: string, description: string | null, 
 
 export async function deleteDeadline(id: string) {
     await db.delete(deadlines).where(eq(deadlines.id, id));
+    revalidatePath('/');
+}
+
+export async function updateDeadline(id: string, title: string, description: string | null, targetDate: Date) {
+    await db.update(deadlines).set({ title, description, targetDate }).where(eq(deadlines.id, id));
     revalidatePath('/');
 }
