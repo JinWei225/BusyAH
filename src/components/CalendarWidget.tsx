@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { CalendarEvent } from '@/lib/calendar';
-import { ChevronLeft, ChevronRight, Calendar as CalIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, endOfWeek, startOfWeek, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, setMonth, setYear } from 'date-fns';
+import UpcomingEvents from './UpcomingEvents';
 import './CalendarWidget.css';
 
 interface CalendarWidgetProps {
@@ -12,6 +13,7 @@ interface CalendarWidgetProps {
 
 export default function CalendarWidget({ events }: CalendarWidgetProps) {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -37,9 +39,15 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
         setCurrentDate(setYear(currentDate, parseInt(e.target.value)));
     };
 
+    const handleDayClick = (day: Date) => {
+        setSelectedDate(day);
+    };
+
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 10 }, (_, i) => currentYear - 5 + i);
+    const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
+
+    const filteredEvents = events.filter(e => isSameDay(new Date(e.start), selectedDate));
 
     if (!mounted) return <div className="calendar-widget" style={{ opacity: 0 }}></div>;
 
@@ -67,12 +75,14 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
                 {days.map((day, i) => {
                     const isSelectedMonth = isSameMonth(day, monthStart);
                     const isToday = isSameDay(day, new Date());
+                    const isSelectedDay = isSameDay(day, selectedDate);
                     const dayEvents = events.filter(e => isSameDay(new Date(e.start), day));
 
                     return (
                         <div
                             key={i}
-                            className={`cal-day ${!isSelectedMonth ? 'disabled' : ''} ${isToday ? 'today' : ''}`}
+                            className={`cal-day ${!isSelectedMonth ? 'disabled' : ''} ${isToday ? 'today' : ''} ${isSelectedDay ? 'selected' : ''}`}
+                            onClick={() => handleDayClick(day)}
                         >
                             <span className="cal-day-num">{format(day, dateFormat)}</span>
                             {dayEvents.length > 0 && <span className="cal-event-dot"></span>}
@@ -81,26 +91,11 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
                 })}
             </div>
 
-            <div className="events-list-section mt-4">
-                <h3 className="events-title"><CalIcon size={18} /> Upcoming Events</h3>
-                <div className="events-list">
-                    {events.length === 0 ? (
-                        <p className="no-events">No upcoming events.</p>
-                    ) : (
-                        events.map(event => (
-                            <div key={event.id} className="event-item">
-                                <div className="event-date">
-                                    <span className="event-day">{format(new Date(event.start), 'dd')}</span>
-                                    <span className="event-month">{format(new Date(event.start), 'MMM')}</span>
-                                </div>
-                                <div className="event-details">
-                                    <h4 className="event-name">{event.title}</h4>
-                                    <p className="event-time">{format(new Date(event.start), 'p')} - {format(new Date(event.end), 'p')}</p>
-                                </div>
-                            </div>
-                        ))
-                    )}
-                </div>
+            <div className="mt-4">
+                <UpcomingEvents
+                    events={filteredEvents}
+                    title={`Events for ${format(selectedDate, 'MMMM d, yyyy')}`}
+                />
             </div>
         </div>
     );
