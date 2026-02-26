@@ -200,7 +200,7 @@ export default function TodoList({ initialTodos, allSubtasks }: TodoListProps) {
                                             <div key={subtask.id} className={`subtask-item ${subtask.isCompleted ? 'completed' : ''} ${isSubEditing ? 'editing' : ''}`}>
                                                 <button
                                                     className="todo-check"
-                                                    onClick={() => !isSubEditing && toggleSubtask(subtask.id, subtask.isCompleted)}
+                                                    onClick={() => !isSubEditing && toggleSubtask(subtask.id, !subtask.isCompleted)}
                                                     disabled={isSubEditing}
                                                 >
                                                     {subtask.isCompleted ? <CheckCircle2 size={16} color="var(--success)" /> : <Circle size={16} color="var(--text-secondary)" />}
