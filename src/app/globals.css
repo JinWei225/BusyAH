@@ -316,7 +316,7 @@ a {
 
 @media (max-width: 768px) {
   .app-container {
-    padding-top: 60px;
+    padding-top: calc(85px + env(safe-area-inset-top));
     padding-bottom: 70px;
   }
 
@@ -336,11 +336,13 @@ a {
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: auto;
+    min-height: 60px;
     background: var(--bg-surface);
     border-bottom: 1px solid var(--border-color);
     padding: 0 1rem;
-    padding-top: env(safe-area-inset-top);
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-bottom: 0.8rem;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
