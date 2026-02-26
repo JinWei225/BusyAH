@@ -282,6 +282,7 @@ a {
 .sidebar-header {
   display: flex;
   flex-direction: column;
+  padding-top: calc(0.8rem + env(safe-area-inset-top));
 }
 
 .sidebar-divider {
