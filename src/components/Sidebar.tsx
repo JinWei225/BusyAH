@@ -2,10 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Calendar, CheckSquare, Clock, Settings } from 'lucide-react';
+import { Calendar, CheckSquare, Clock, Settings, RefreshCw } from 'lucide-react';
 
 export default function Sidebar() {
     const pathname = usePathname();
+
+    const handleRefresh = () => {
+        window.location.reload();
+    };
 
     return (
         <aside className="sidebar">
@@ -37,6 +41,13 @@ export default function Sidebar() {
                         <span>Settings</span>
                     </div>
                 </Link>
+
+                <div className="sidebar-divider" />
+
+                <button className="nav-link sync-btn" onClick={handleRefresh} style={{ border: 'none', background: 'none', width: '100%', cursor: 'pointer' }}>
+                    <RefreshCw size={20} />
+                    <span>Sync</span>
+                </button>
             </nav>
         </aside>
     );

@@ -277,3 +277,41 @@ a {
   margin-bottom: 2.5rem;
   font-size: 1.1rem;
 }
+
+/* Sidebar Sync and Divider */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 1rem 0;
+  opacity: 0.5;
+}
+
+.sync-btn {
+  margin-top: auto;
+  color: var(--primary) !important;
+}
+
+.sync-btn:active svg {
+  animation: rotate 0.8s ease-in-out;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-divider {
+    display: none;
+  }
+
+  .sync-btn {
+    margin-top: 0;
+    padding: 10px !important;
+  }
+}
