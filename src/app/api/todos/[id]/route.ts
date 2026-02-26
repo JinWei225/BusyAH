@@ -3,10 +3,10 @@ import { updateTodo, deleteTodo, toggleTodo } from '@/app/actions';
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const body = await request.json();
 
         if (body.isCompleted !== undefined) {
@@ -24,10 +24,10 @@ export async function PATCH(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params;
+        const { id } = await params;
         await deleteTodo(id);
         return NextResponse.json({ message: 'Todo deleted' });
     } catch (error) {

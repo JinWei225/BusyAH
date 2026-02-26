@@ -3,10 +3,10 @@ import { getSubtasks, createSubtask } from '@/app/actions';
 
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: todoId } = params;
+        const { id: todoId } = await params;
         const subtasks = await getSubtasks(todoId);
         return NextResponse.json(subtasks);
     } catch (error) {
@@ -16,10 +16,10 @@ export async function GET(
 
 export async function POST(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: todoId } = params;
+        const { id: todoId } = await params;
         const { title } = await request.json();
         if (!title) {
             return NextResponse.json({ error: 'Title is required' }, { status: 400 });

@@ -3,10 +3,10 @@ import { updateDeadline, deleteDeadline } from '@/app/actions';
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const { title, description, targetDate } = await request.json();
         await updateDeadline(id, title, description, new Date(targetDate));
         return NextResponse.json({ message: 'Deadline updated' });
@@ -17,10 +17,10 @@ export async function PATCH(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params;
+        const { id } = await params;
         await deleteDeadline(id);
         return NextResponse.json({ message: 'Deadline deleted' });
     } catch (error) {
