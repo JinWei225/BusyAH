@@ -316,7 +316,7 @@ a {
 
 @media (max-width: 768px) {
   .app-container {
-    padding-top: calc(85px + env(safe-area-inset-top));
+    padding-top: calc(75px + env(safe-area-inset-top));
     padding-bottom: 70px;
   }
 
