@@ -190,7 +190,7 @@ a {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 1rem;
-    padding-top: calc(0.8rem + env(safe-area-inset-top));
+    padding-top: calc(1.8rem + env(safe-area-inset-top));
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -282,7 +282,6 @@ a {
 .sidebar-header {
   display: flex;
   flex-direction: column;
-  padding-top: calc(0.8rem + env(safe-area-inset-top)) + 1rem;
 }
 
 .sidebar-divider {
