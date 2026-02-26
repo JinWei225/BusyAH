@@ -13,9 +13,19 @@ export default function Sidebar() {
 
     return (
         <aside className="sidebar">
-            <h1>
-                <span style={{ color: 'var(--text-primary)' }}>Busy</span>AH
-            </h1>
+            <div className="sidebar-header">
+                <h1>
+                    <span style={{ color: 'var(--text-primary)' }}>Busy</span>AH
+                </h1>
+                <button className="nav-link sync-btn desktop-only" onClick={handleRefresh} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+                    <RefreshCw size={20} />
+                    <span>Sync</span>
+                </button>
+                <button className="nav-link sync-btn mobile-only" onClick={handleRefresh} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+                    <RefreshCw size={20} />
+                </button>
+            </div>
+
             <nav>
                 <Link href="/">
                     <div className="nav-link" data-active={pathname === '/' ? 'true' : 'false'}>
@@ -41,13 +51,6 @@ export default function Sidebar() {
                         <span>Settings</span>
                     </div>
                 </Link>
-
-                <div className="sidebar-divider" />
-
-                <button className="nav-link sync-btn" onClick={handleRefresh} style={{ border: 'none', background: 'none', width: '100%', cursor: 'pointer' }}>
-                    <RefreshCw size={20} />
-                    <span>Sync</span>
-                </button>
             </nav>
         </aside>
     );
