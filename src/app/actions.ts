@@ -96,6 +96,7 @@ export async function createDeadline(title: string, description: string | null, 
         description,
         targetDate,
     });
+    revalidatePath('/deadlines');
     revalidatePath('/');
     const result = await db.select().from(deadlines).where(eq(deadlines.id, id)).limit(1);
     return result[0] ?? null;
@@ -103,10 +104,12 @@ export async function createDeadline(title: string, description: string | null, 
 
 export async function deleteDeadline(id: string) {
     await db.delete(deadlines).where(eq(deadlines.id, id));
+    revalidatePath('/deadlines');
     revalidatePath('/');
 }
 
 export async function updateDeadline(id: string, title: string, description: string | null, targetDate: Date) {
     await db.update(deadlines).set({ title, description, targetDate }).where(eq(deadlines.id, id));
+    revalidatePath('/deadlines');
     revalidatePath('/');
 }

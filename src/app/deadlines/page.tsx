@@ -1,6 +1,8 @@
 import DeadlinesList from '@/components/DeadlinesList';
 import { getDeadlines } from '@/app/actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DeadlinesPage() {
     const deadlines = await getDeadlines();
 
