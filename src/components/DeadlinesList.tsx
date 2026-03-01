@@ -12,6 +12,7 @@ interface DeadlinesListProps {
 }
 
 export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) {
+    const [deadlines, setDeadlines] = useState<Deadline[]>(initialDeadlines);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [targetDate, setTargetDate] = useState('');
@@ -35,7 +36,10 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
         e.preventDefault();
         if (!title.trim() || !targetDate) return;
         setLoading(true);
-        await createDeadline(title, description, new Date(targetDate));
+        const newDeadline = await createDeadline(title, description, new Date(targetDate));
+        if (newDeadline) {
+            setDeadlines(prev => [newDeadline, ...prev]);
+        }
         setTitle('');
         setDescription('');
         setTargetDate('');
@@ -46,6 +50,9 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
         if (!editTitle.trim() || !editDate) return;
         setLoading(true);
         await updateDeadline(id, editTitle, null, new Date(editDate));
+        setDeadlines(prev => prev.map(d =>
+            d.id === id ? { ...d, title: editTitle, targetDate: new Date(editDate).toISOString() } : d
+        ));
         setEditingDeadlineId(null);
         setLoading(false);
     };
@@ -99,10 +106,10 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
             <div className="deadline-section" style={{ marginTop: '3rem' }}>
                 <h3 className="section-title">Active Deadlines</h3>
                 <div className="deadline-items">
-                    {initialDeadlines.length === 0 && (
+                    {deadlines.length === 0 && (
                         <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '2rem' }}>No deadlines set. You're all caught up!</p>
                     )}
-                    {initialDeadlines.map(deadline => {
+                    {deadlines.map(deadline => {
                         const isEditing = editingDeadlineId === deadline.id;
                         const isMenuOpen = activeMenuId === deadline.id;
 
@@ -168,6 +175,7 @@ export default function DeadlinesList({ initialDeadlines }: DeadlinesListProps) 
                                                     <button className="danger" onClick={(e) => {
                                                         e.stopPropagation();
                                                         deleteDeadline(deadline.id);
+                                                        setDeadlines(prev => prev.filter(d => d.id !== deadline.id));
                                                         setActiveMenuId(null);
                                                     }}>
                                                         <Trash2 size={14} /> Delete

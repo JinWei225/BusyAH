@@ -89,13 +89,16 @@ export async function getDeadlines() {
 }
 
 export async function createDeadline(title: string, description: string | null, targetDate: Date) {
+    const id = randomUUID();
     await db.insert(deadlines).values({
-        id: randomUUID(),
+        id,
         title,
         description,
         targetDate,
     });
     revalidatePath('/');
+    const result = await db.select().from(deadlines).where(eq(deadlines.id, id)).limit(1);
+    return result[0] ?? null;
 }
 
 export async function deleteDeadline(id: string) {
