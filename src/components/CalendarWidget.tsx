@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { CalendarEvent } from '@/lib/calendar';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, endOfWeek, startOfWeek, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, setMonth, setYear } from 'date-fns';
-import UpcomingEvents from './UpcomingEvents';
+
 import './CalendarWidget.css';
 
 interface CalendarWidgetProps {
@@ -91,11 +91,20 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
                 })}
             </div>
 
-            <div style={{ marginTop: '3rem' }}>
-                <UpcomingEvents
-                    events={filteredEvents}
-                    title={`Events for ${format(selectedDate, 'MMMM d, yyyy')}`}
-                />
+            <div style={{ marginTop: '3rem', color: 'var(--text-primary)' }}>
+                <h3 style={{ marginBottom: '1rem' }}>Events for {format(selectedDate, 'MMMM d, yyyy')}</h3>
+                {filteredEvents.length > 0 ? (
+                    <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {filteredEvents.map((evt, idx) => (
+                            <li key={idx} style={{ background: 'var(--bg-surface-hover)', padding: '10px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ fontWeight: 500 }}>{evt.title}</span>
+                                <span style={{ color: 'var(--text-secondary)' }}>{format(new Date(evt.start), 'h:mm a')}</span>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p style={{ color: 'var(--text-secondary)' }}>No events scheduled.</p>
+                )}
             </div>
         </div>
     );

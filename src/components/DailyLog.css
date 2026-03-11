@@ -1,0 +1,126 @@
+.daily-log {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+}
+
+.input-container {
+    margin-bottom: 2rem;
+}
+
+.daily-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-primary);
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.daily-input:focus {
+    border-bottom-color: var(--primary-color);
+}
+
+.entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.entry-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.entry-item:hover {
+    background-color: var(--bg-hover);
+}
+
+.entry-item .delete-btn {
+    opacity: 0;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.entry-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.entry-item .delete-btn:hover {
+    color: #ef4444;
+}
+
+.entry-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.entry-content-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    padding: 2px 0;
+}
+
+.entry-item.completed .entry-content-input {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.entry-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s;
+    color: transparent;
+}
+
+.entry-checkbox.completed {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.entry-bullet {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.entry-note-spacer {
+    width: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem 0;
+    font-style: italic;
+}

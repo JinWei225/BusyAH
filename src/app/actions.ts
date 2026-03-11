@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { todos, subtasks, deadlines, settings } from '@/lib/db/schema';
+import { dailyLogEntries, deadlines, settings } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { randomUUID } from 'crypto';
@@ -24,63 +24,36 @@ export async function updateSetting(key: string, value: string) {
     revalidatePath('/', 'layout');
 }
 
-// Server Actions for Todos
-// ... existing code ...
-export async function getTodos() {
-    return await db.select().from(todos).orderBy(desc(todos.createdAt));
+// Server Actions for Daily Log Entries
+export async function getDailyLogEntries(date: string) {
+    return await db.select().from(dailyLogEntries).where(eq(dailyLogEntries.date, date)).orderBy(desc(dailyLogEntries.createdAt));
 }
 
-export async function createTodo(title: string, notes: string = '') {
-    await db.insert(todos).values({
-        id: randomUUID(),
-        title,
-        notes,
+export async function createDailyLogEntry(date: string, type: 'task' | 'idea' | 'note', content: string) {
+    const id = randomUUID();
+    await db.insert(dailyLogEntries).values({
+        id,
+        date,
+        type,
+        content,
     });
-    revalidatePath('/');
+    revalidatePath(`/day/${date}`);
+    return id; // Optionally return the new ID
 }
 
-export async function toggleTodo(id: string, isCompleted: boolean) {
-    await db.update(todos).set({ isCompleted }).where(eq(todos.id, id));
-    revalidatePath('/');
+export async function toggleDailyLogEntry(id: string, isCompleted: boolean, date: string) {
+    await db.update(dailyLogEntries).set({ isCompleted }).where(eq(dailyLogEntries.id, id));
+    revalidatePath(`/day/${date}`);
 }
 
-export async function deleteTodo(id: string) {
-    await db.delete(todos).where(eq(todos.id, id));
-    revalidatePath('/');
+export async function deleteDailyLogEntry(id: string, date: string) {
+    await db.delete(dailyLogEntries).where(eq(dailyLogEntries.id, id));
+    revalidatePath(`/day/${date}`);
 }
 
-export async function updateTodo(id: string, title: string, notes: string = '') {
-    await db.update(todos).set({ title, notes }).where(eq(todos.id, id));
-    revalidatePath('/');
-}
-
-// Subtasks
-export async function getSubtasks(todoId: string) {
-    return await db.select().from(subtasks).where(eq(subtasks.todoId, todoId)).orderBy(desc(subtasks.createdAt));
-}
-
-export async function createSubtask(todoId: string, title: string) {
-    await db.insert(subtasks).values({
-        id: randomUUID(),
-        todoId,
-        title,
-    });
-    revalidatePath('/');
-}
-
-export async function toggleSubtask(id: string, isCompleted: boolean) {
-    await db.update(subtasks).set({ isCompleted }).where(eq(subtasks.id, id));
-    revalidatePath('/');
-}
-
-export async function deleteSubtask(id: string) {
-    await db.delete(subtasks).where(eq(subtasks.id, id));
-    revalidatePath('/');
-}
-
-export async function updateSubtask(id: string, title: string) {
-    await db.update(subtasks).set({ title }).where(eq(subtasks.id, id));
-    revalidatePath('/');
+export async function updateDailyLogEntry(id: string, content: string, date: string) {
+    await db.update(dailyLogEntries).set({ content }).where(eq(dailyLogEntries.id, id));
+    revalidatePath(`/day/${date}`);
 }
 
 // Deadlines

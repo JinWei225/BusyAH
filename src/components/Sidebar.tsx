@@ -28,9 +28,9 @@ export default function Sidebar() {
 
             <nav>
                 <Link href="/">
-                    <div className="nav-link" data-active={pathname === '/' ? 'true' : 'false'}>
+                    <div className="nav-link" data-active={pathname === '/' || pathname.startsWith('/day/') ? 'true' : 'false'}>
                         <CheckSquare size={20} />
-                        <span>Dashboard</span>
+                        <span>Daily Log</span>
                     </div>
                 </Link>
                 <Link href="/calendar">
