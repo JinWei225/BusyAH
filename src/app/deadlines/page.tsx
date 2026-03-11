@@ -8,7 +8,7 @@ export default async function DeadlinesPage() {
 
     return (
         <div style={{ maxWidth: '800px', width: '100%', margin: '0 auto' }}>
-            <h1 className="page-title" style={{ marginBottom: '2rem' }}>Deadlines Manager</h1>
+            <h1 className="page-title" style={{ marginBottom: '2rem', textAlign: 'center' }}>Deadlines Manager</h1>
             <DeadlinesList initialDeadlines={deadlines} />
         </div>
     );

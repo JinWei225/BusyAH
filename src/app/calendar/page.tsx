@@ -10,7 +10,7 @@ export default async function CalendarPage() {
 
     return (
         <div style={{ maxWidth: '800px', width: '100%', margin: '0 auto' }}>
-            <h1 className="page-title" style={{ marginBottom: '2rem' }}>Calendar & Events</h1>
+            <h1 className="page-title" style={{ marginBottom: '2rem', textAlign: 'center' }}>Calendar & Events</h1>
             <CalendarWidget events={events} />
         </div>
     );

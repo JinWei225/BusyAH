@@ -23,6 +23,12 @@
     line-height: 1.5;
 }
 
+.daily-input::placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .daily-input:focus {
     border-bottom-color: var(--primary-color);
 }
