@@ -15,8 +15,19 @@
   --danger: #ff4757;
   --success: #2ed573;
   --radius: 12px;
-  --font-main: 'Inter', sans-serif;
+  --font-main: 'JetBrains Mono', 'Courier New', Courier, monospace;
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.light-theme {
+  --bg-color: #fdfaf6;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f5f2eb;
+  --text-primary: #2d2d2d;
+  --text-secondary: #7a756a;
+  --primary: #d95d10;
+  --primary-hover: #e06c26;
+  --border-color: #e5e0d8;
 }
 
 * {
