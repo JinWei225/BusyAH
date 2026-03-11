@@ -27,8 +27,8 @@ export default function DailyLog({ date, initialEntries }: DailyLogProps) {
     const [inputValue, setInputValue] = useState('');
     const [isSaving, setIsSaving] = useState(false);
 
-    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && inputValue.trim()) {
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey && inputValue.trim()) {
             e.preventDefault();
             let type: EntryType = 'note';
             let content = inputValue.trim();
@@ -57,6 +57,11 @@ export default function DailyLog({ date, initialEntries }: DailyLogProps) {
 
             setEntries(prev => [newEntry, ...prev]);
             setInputValue('');
+            
+            // Reset textarea height
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto';
+
             setIsSaving(true);
             
             try {
@@ -106,14 +111,19 @@ export default function DailyLog({ date, initialEntries }: DailyLogProps) {
     return (
         <div className="daily-log">
             <div className="input-container">
-                <input
-                    type="text"
+                <textarea
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
+                    onInput={(e) => {
+                        const target = e.target as HTMLTextAreaElement;
+                        target.style.height = 'auto';
+                        target.style.height = `${target.scrollHeight}px`;
+                    }}
                     onKeyDown={handleKeyDown}
                     placeholder="Write a note, [] for task, - for idea..."
                     className="daily-input"
                     disabled={isSaving && false} 
+                    rows={1}
                 />
             </div>
 
@@ -122,16 +132,28 @@ export default function DailyLog({ date, initialEntries }: DailyLogProps) {
                     <div key={entry.id} className={`entry-item ${entry.type} ${entry.type === 'task' && entry.isCompleted ? 'completed' : ''}`}>
                         <div className="entry-left">
                             {renderEntryIcon(entry)}
-                            <input 
-                                type="text"
+                            <textarea 
                                 className="entry-content-input"
                                 defaultValue={entry.content}
                                 onBlur={(e) => handleContentBlur(entry.id, e.target.value, entry.content)}
                                 onKeyDown={(e) => {
-                                    if(e.key === 'Enter') {
+                                    if(e.key === 'Enter' && !e.shiftKey) {
+                                        e.preventDefault();
                                         e.currentTarget.blur();
                                     }
                                 }}
+                                onInput={(e) => {
+                                    const target = e.target as HTMLTextAreaElement;
+                                    target.style.height = 'auto';
+                                    target.style.height = `${target.scrollHeight}px`;
+                                }}
+                                ref={(el) => {
+                                    if (el) {
+                                        el.style.height = 'auto';
+                                        el.style.height = `${el.scrollHeight}px`;
+                                    }
+                                }}
+                                rows={1}
                             />
                         </div>
                         <button className="delete-btn" onClick={() => handleDelete(entry.id)}>

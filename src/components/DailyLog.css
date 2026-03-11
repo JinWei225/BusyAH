@@ -18,6 +18,9 @@
     outline: none;
     font-family: inherit;
     transition: border-color 0.2s;
+    resize: none;
+    overflow: hidden;
+    line-height: 1.5;
 }
 
 .daily-input:focus {
@@ -77,6 +80,9 @@
     font-family: inherit;
     outline: none;
     padding: 2px 0;
+    resize: none;
+    overflow: hidden;
+    line-height: 1.5;
 }
 
 .entry-item.completed .entry-content-input {

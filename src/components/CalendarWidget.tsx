@@ -96,9 +96,18 @@ export default function CalendarWidget({ events }: CalendarWidgetProps) {
                 {filteredEvents.length > 0 ? (
                     <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         {filteredEvents.map((evt, idx) => (
-                            <li key={idx} style={{ background: 'var(--bg-surface-hover)', padding: '10px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ fontWeight: 500 }}>{evt.title}</span>
-                                <span style={{ color: 'var(--text-secondary)' }}>{format(new Date(evt.start), 'h:mm a')}</span>
+                            <li key={idx} style={{ background: 'var(--bg-surface-hover)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
+                                    <span style={{ fontWeight: 500, wordBreak: 'break-word', lineHeight: '1.4' }}>{evt.title}</span>
+                                    <span style={{ color: 'var(--text-secondary)', whiteSpace: 'nowrap', flexShrink: 0, marginTop: '2px' }}>
+                                        {format(new Date(evt.start), 'h:mm a')}
+                                    </span>
+                                </div>
+                                {evt.location && (
+                                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', display: 'flex', alignItems: 'flex-start', gap: '4px' }}>
+                                        <span>📍</span> <span style={{ wordBreak: 'break-word' }}>{evt.location}</span>
+                                    </div>
+                                )}
                             </li>
                         ))}
                     </ul>
