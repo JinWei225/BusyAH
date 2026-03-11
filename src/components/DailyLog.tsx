@@ -120,7 +120,7 @@ export default function DailyLog({ date, initialEntries }: DailyLogProps) {
                         target.style.height = `${target.scrollHeight}px`;
                     }}
                     onKeyDown={handleKeyDown}
-                    placeholder="Write a note, [] for task, - for idea..."
+                    placeholder="Write something..."
                     className="daily-input"
                     disabled={isSaving && false} 
                     rows={1}
